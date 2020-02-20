@@ -45,7 +45,7 @@ def iteration(a, b, chunks, kBytes):
     return chunks
 
 
-# Write output data to message
+# Write output data to file
 def writeData(fn, chunks, pad):
     # Iterate through the list and write bytes to a message
     file = open(fn, "wb")
@@ -84,7 +84,7 @@ def testFile(filename):
     try:
         f0 = open(filename, "rb")
     except FileNotFoundError:
-        print("The message: \'" + filename + "\' does not exist! Exiting!")
+        print("The file: \'" + filename + "\' does not exist! Exiting!")
         sys.exit()
     return f0
 
