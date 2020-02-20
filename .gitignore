@@ -1,3 +1,6 @@
 # Ignore Pycharm Directories #
 venv/
 .idea/
+
+# Ignore .txt IO Files #
+*.txt

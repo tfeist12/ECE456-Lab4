@@ -51,7 +51,7 @@ if __name__ == '__main__':
     bData = bytearray(bData)
 
     # Write encrypted data to a file
-    L1.writeData("encryptedData", chunks, pad)
+    L1.writeData("encryptedData.txt", chunks, pad)
 
 
     # Use socket programming to send the encrypted data to the server. Wait for the response and display the response.

@@ -47,7 +47,7 @@ def iteration(a, b, chunks, kBytes):
 
 # Write output data to file
 def writeData(fn, chunks, pad):
-    # Iterate through the list and write bytes to a message
+    # Iterate through the list and write bytes to a file
     file = open(fn, "wb")
     for a in range(0, len(chunks)):
         x = chunks[a]
@@ -79,7 +79,7 @@ def encrypt(data, key):
     return chunks
 
 
-# Check if message exists and open if so
+# Check if file exists and open if so
 def testFile(filename):
     try:
         f0 = open(filename, "rb")
@@ -99,7 +99,7 @@ def testKey(key):
 # Ensure number of bytes of data isn't  == 0 or > 250
 def testSize(data):
     if len(data) == 0:
-        print("No data in the message, Exiting!")
+        print("No data in the file, Exiting!")
         sys.exit()
     elif len(data) > 250:
         print("Data must be limited to 250 characters, Exiting!")
