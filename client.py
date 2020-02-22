@@ -42,24 +42,16 @@ if __name__ == '__main__':
     L1.testKey(key)
     print("Key: " + key + "\n")
 
-    # Encrypt the data and convert to a bytearray
+    # Encrypt the data, write it, and then read in as bytes
     chunks = L1.encrypt(data, key)
-    bData = []
-    for a in range(0, len(chunks)):
-        for b in range(0, len(chunks[a])):
-            bData.append(ord(chunks[a][b]))
-    bData = bytearray(bData)
-
-    # Write encrypted data to a file
     L1.writeData("encryptedData.txt", chunks, pad)
-
+    ef = open("encryptedData.txt", "rb")
+    data = ef.read()
+    ef.close()
 
     # Use socket programming to send the encrypted data to the server. Wait for the response and display the response.
-
-    sock = socket.socket()              # Create a socket object
-    sock.connect((sIP, sPort))          # connect to server
-    sock.sendto(data, (sIP, sPort))     # send data via UDP
-
-
-
-
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # Create a socket object
+    host = socket.gethostname()
+    sock.sendto(data, (host, sPort))
+    rec, address = sock.recvfrom(1024)
+    print("Server response: " + str(rec)[2:][:len(rec)])

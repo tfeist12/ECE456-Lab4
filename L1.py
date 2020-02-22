@@ -1,5 +1,4 @@
 import sys
-from pip._vendor.distlib.compat import raw_input
 
 
 # Divide data into 16 bit chunks
