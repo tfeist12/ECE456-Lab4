@@ -42,16 +42,18 @@ if __name__ == '__main__':
     L1.testKey(key)
     print("Key: " + key + "\n")
 
-    # Encrypt the data, write it, and then read in as bytes
-    chunks = L1.encrypt(data, key)
-    L1.writeData("encryptedData.txt", chunks, pad)
-    ef = open("encryptedData.txt", "rb")
-    data = ef.read()
-    ef.close()
+    # Encrypt data
+    eData = helper.cryption(data, key, pad)
 
     # Use socket programming to send the encrypted data to the server. Wait for the response and display the response.
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # Create a socket object
-    host = socket.gethostname()
-    sock.sendto(data, (host, sPort))
-    rec, address = sock.recvfrom(1024)
-    print("Server response: " + str(rec)[2:][:len(rec)])
+    # host = socket.gethostname()
+    host = str(sIP)
+    sock.sendto(eData, (host, sPort))
+
+    # Receive and print last five messages
+    print("Server response:")
+    for i in range(0, 5):
+        rec, address = sock.recvfrom(1024)
+        print(str(rec)[2:][:-1])
+    sock.close()

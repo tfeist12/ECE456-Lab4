@@ -1,7 +1,22 @@
+from L1 import encrypt
 from struct import unpack, pack
 import binascii
 import re
 import sys
+
+
+# Method for Encryption / Decryption (symmetric)
+def cryption(data, key, pad):
+    chunks = encrypt(data, key)
+    eData = []
+    for a in range(0, len(chunks)):
+        for b in range(0, len(chunks[a])):
+            ab = a == len(chunks)-1
+            cd = b == len(chunks[a])-1
+            ef = pad == 1
+            if not ab & cd & ef:
+                eData.append(ord(chunks[a][b]))
+    return bytes(eData)
 
 
 # Test IP Address
