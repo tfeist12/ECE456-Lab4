@@ -43,7 +43,7 @@ if __name__ == '__main__':
     print("Waiting for client messages\n")
 
     count = 0
-    while count < 5:
+    while True:
         # Receive data from client
         data, address = sock.recvfrom(1024)
         print("Number of messages received: " + str(count + 1))
@@ -61,7 +61,12 @@ if __name__ == '__main__':
 
         # Build response and set it in message log (count: time, message from address)
         log = str(count + 1) + ": " + str(datetime.datetime.now().time())[:8] + ", " + str(data)[2:][:len(data)] + " from " + address[0]
-        mLog[count] = log
+        if count < 5:
+            mLog[count] = log
+        else:
+            for a in range(0,4):
+                mLog[a] = mLog[a+1]
+            mLog[4] = log
 
         # Send last five messages to the client
         for i in range(0, len(mLog)):
